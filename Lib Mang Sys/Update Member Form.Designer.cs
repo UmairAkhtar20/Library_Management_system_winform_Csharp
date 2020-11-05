@@ -42,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_membername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.picdialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pic_member)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,6 +183,10 @@
             this.label1.Text = "Name";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // picdialog
+            // 
+            this.picdialog.FileName = "openFileDialog1";
+            // 
             // Update_Member_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -225,5 +230,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txt_membername;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog picdialog;
     }
 }

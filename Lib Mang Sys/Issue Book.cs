@@ -24,25 +24,10 @@ namespace Lib_Mang_Sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\umair\source\repos\Lib Mang Sys\Lib Mang Sys\Database1.mdf;Integrated Security=True";
-            using (SqlConnection conn = new SqlConnection(connstr))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "Select ID,Name,AuthorName,PublishDAte,Category from dbo.Books";
-                    SqlCommand command = new SqlCommand(query, conn);
-                    SqlDataReader reader = command.ExecuteReader();
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
+            var dt = LMS.DAL.BooksDAO.loaddatainbooksgrid();
                     dataGridView1.DataSource = dt;
 
-                }
-                catch (Exception)
-                {
-
-                }
-            }
+          
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -52,59 +37,16 @@ namespace Lib_Mang_Sys
 
                  id = (int)dataGridView1.CurrentRow.Cells[0].Value;
                 string username = Username.name;
-                issuebook(id, username);
-            }
-        }
-        public void issuebook(int id,string name)
-        {
-            string connstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\umair\source\repos\Lib Mang Sys\Lib Mang Sys\Database1.mdf;Integrated Security=True";
-            using (SqlConnection conn = new SqlConnection(connstr))
-            {
-                try
+                var v = LMS.DAL.BooksDAO.issuebooks(id, username);
+                if (v == 1)
                 {
-                    conn.Open();
-                    string query = string.Format(@"Select ID,Name,AuthorName,PublishDAte,Category from dbo.Books where ID={0}",id);
-                    SqlCommand command = new SqlCommand(query, conn);
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        string BookName= reader.GetString(reader.GetOrdinal("Name"));
-                        string AuthorName= reader.GetString(reader.GetOrdinal("AuthorName"));
-                        string Category= reader.GetString(reader.GetOrdinal("Category"));
-                        string MemberName = name;
-                        intodata(BookName, AuthorName, Category, MemberName);
-                    }
-                }
-                catch (Exception)
-                {
-
-                }
-            }
-        }
-        public void intodata(string bookname,string authorname,string category,string membername)
-        {
-            string connstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\umair\source\repos\Lib Mang Sys\Lib Mang Sys\Database1.mdf;Integrated Security=True";
-            using (SqlConnection conn = new SqlConnection(connstr))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = string.Format(@"INSERT INTO dbo.issuebook(MemberName,BookName,AuthorName,Category,issueDAte,BookReturn,ReturnDAte) VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}')"
-                                , membername, bookname, authorname,category,DateTime.Now.ToString(),0,"No Return");
-                    SqlCommand command = new SqlCommand(query, conn);
-                    int recordeff = command.ExecuteNonQuery();
                     MessageBox.Show("BOOK Has been Issued to your account " +
-                        "collect it from counter");
-
-
-
-                }
-                catch (Exception)
-                {
-
+                      "collect it from counter");
                 }
             }
         }
+      
+     
         
     }
 }

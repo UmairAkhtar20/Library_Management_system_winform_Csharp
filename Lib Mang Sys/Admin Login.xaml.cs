@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using LMS.Entities;
+using LMS.BOA;
 
 namespace Lib_Mang_Sys
 {
@@ -28,10 +30,21 @@ namespace Lib_Mang_Sys
 
         private void admin_login_Click(object sender, RoutedEventArgs e)
         {
-            string User = admin_user.Text;
-            string Pass = admin_pass.Password;
-            DAL dAL = new DAL();
-            dAL.checkadmin(User, Pass);
+            var dto = new LMS.Entities.AdminDTO();
+            dto.Name = admin_user.Text;
+            dto.Password = admin_pass.Password;
+            var v = LMS.BOA.AdminBO.checkadmin(dto);
+            if (v == 1)
+            {
+                Admin_Login a = new Admin_Login();
+                a.Hide();
+                Admin_Panel b = new Admin_Panel();
+                b.Show();
+            }
+            else
+            {
+                MessageBox.Show("Wrong Credentials");
+            }
            
 
         }

@@ -42,6 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_membername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.picdialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pic_member)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             this.button1.TabIndex = 40;
             this.button1.Text = "Upload";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label6
             // 
@@ -214,5 +216,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txt_membername;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.OpenFileDialog picdialog;
     }
 }

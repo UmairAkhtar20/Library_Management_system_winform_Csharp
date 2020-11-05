@@ -22,25 +22,11 @@ namespace Lib_Mang_Sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\umair\source\repos\Lib Mang Sys\Lib Mang Sys\Database1.mdf;Integrated Security=True";
-            using (SqlConnection conn = new SqlConnection(connstr))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "Select ID,Name,FatherName,DOR from dbo.NewMember where IsMember='1'";
-                    SqlCommand command = new SqlCommand(query, conn);
-                    SqlDataReader reader = command.ExecuteReader();
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
+            var dt = LMS.DAL.NewMemberDAO.loaddataintupdatemembergrid();
+              
                     dataGridView1.DataSource = dt;
 
-                }
-                catch (Exception)
-                {
-
-                }
-            }
+              
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -51,8 +37,11 @@ namespace Lib_Mang_Sys
                 
                 var id =(int)dataGridView1.CurrentRow.Cells[0].Value;
 
-                DAL dAL = new DAL();
-                dAL.CancelMember(id);
+                var dal =LMS.DAL.NewMemberDAO.cancelmembership(id);
+                if (dal == 1)
+                {
+                    MessageBox.Show("Memship is Cancelled");
+                }
             }
         }
     }

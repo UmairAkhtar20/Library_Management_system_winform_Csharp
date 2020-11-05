@@ -23,25 +23,9 @@ namespace Lib_Mang_Sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connstr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\umair\source\repos\Lib Mang Sys\Lib Mang Sys\Database1.mdf;Integrated Security=True";
-            using (SqlConnection conn = new SqlConnection(connstr))
-            {
-                try
-                {
-                    conn.Open();
-                    string query = "Select ID,Name,FatherName,DOR from dbo.NewMember where IsMember='1'";
-                    SqlCommand command = new SqlCommand(query, conn);
-                    SqlDataReader reader = command.ExecuteReader();
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    dataGridView1.DataSource = dt;
-
-                }
-                catch (Exception)
-                {
-
-                }
-            }
+           var dAL =LMS.BOA.NewMemebrBO.loaddataindatagrid();
+           
+            dataGridView1.DataSource =dAL ;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

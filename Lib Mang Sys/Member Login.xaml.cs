@@ -28,11 +28,23 @@ namespace Lib_Mang_Sys
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string memberusername = txt_memberusername.Text;
-            string memberuserpassword = userpassword.Password;
-            DAL dAL = new DAL();
-            dAL.checkuser(memberusername, memberuserpassword);
-            Username.name = memberusername;
+            var dto = new LMS.Entities.NewMemberDTO();
+           dto.MemberName = txt_memberusername.Text;
+            dto.Password = userpassword.Password;
+           
+           Username.name = dto.MemberName;
+            var v = LMS.DAL.NewMemberDAO.checkmember(dto);
+            if (v == 1)
+            {
+                Admin_Login a = new Admin_Login();
+                a.Hide();
+                Member_Panel b = new Member_Panel();
+                b.Show();
+            }
+            else
+            {
+                MessageBox.Show("Wrong Username or Password");
+            }
            
         }
 

@@ -30,25 +30,29 @@ namespace Lib_Mang_Sys
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string membername = txt_membername.Text.Trim();
-            string memberfathername = txt_memberfather.Text.Trim();
-            string memberphone = text_memberphone.Text.Trim();
-            string memebremail = txt_memberemail.Text;
-            string memberpassword = membername + "123";
-            string membercnic = txt_membercnic.Text;
-            string picturename = "";
+            var dto = new LMS.Entities.NewMemberDTO();
+            dto.MemberName= txt_membername.Text.Trim();
+            dto.FatherName= txt_memberfather.Text.Trim();
+            dto.Phone = text_memberphone.Text.Trim();
+            dto.Email   = txt_memberemail.Text;
+            dto.Password  = dto.MemberName + "123";
+            dto.Cnic  = txt_membercnic.Text;
+            dto.Picture  = "";
             if (pic_member.Image != null)
             {
                 String applicationBasePath = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
                 String pathToSaveImage = applicationBasePath + @"\images\";
 
-                picturename = Guid.NewGuid().ToString() + ".jpg";
-                String imgPath = pathToSaveImage + picturename;
+                dto.Picture = Guid.NewGuid().ToString() + ".jpg";
+                String imgPath = pathToSaveImage + dto.Picture;
 
                 pic_member.Image.Save(imgPath);
             }
-            DAL dAL = new DAL();
-            dAL.AddnewMember(membername,memberfathername,memberphone,memebremail,memberpassword,picturename,membercnic);
+            var v = LMS.BOA.NewMemebrBO.Addnewmember(dto);
+            if (v == 1)
+            {
+                MessageBox.Show("Data Is saved");
+            }
            
 
 

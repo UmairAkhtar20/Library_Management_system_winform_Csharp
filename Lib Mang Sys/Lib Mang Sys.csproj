@@ -177,7 +177,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\DAL.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +252,20 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LMS.BOA\LMS.BAL.csproj">
+      <Project>{2b3a61a3-8b4e-48a5-bd4a-cfa45c2bd86e}</Project>
+      <Name>LMS.BAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LMS.DAL\LMS.DAL.csproj">
+      <Project>{e6ea2197-e28d-447e-acc0-83cc3a611fde}</Project>
+      <Name>LMS.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LMS.Entities\LMS.Entities.csproj">
+      <Project>{49a7b876-19a6-4c35-a449-17cf4734bc4a}</Project>
+      <Name>LMS.Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

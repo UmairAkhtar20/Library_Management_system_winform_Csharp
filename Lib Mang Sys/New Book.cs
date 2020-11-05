@@ -20,14 +20,18 @@ namespace Lib_Mang_Sys
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = txt_bookName.Text;
-            string authorname = txt_AuthorName.Text;
-            string isbn = txt_isbnnmbr.Text;
-            string publishdate = txt_publishdate.Text;
-            string category = txt_category.Text;
-
-            DAL dAL = new DAL();
-            dAL.Addbooks(name, authorname, isbn, publishdate, category);
+            var dto = new LMS.Entities.BooksDTO();
+            dto.BookName = txt_bookName.Text;
+            dto.BookAuthor= txt_AuthorName.Text;
+            dto.BookISBN = txt_isbnnmbr.Text;
+            dto.BookPublishdate = txt_publishdate.Text;
+            dto.BooKCategory = txt_category.Text;
+            var v = LMS.BOA.BooksBO.addnewbooks(dto);
+            if (v == 1)
+            {
+                MessageBox.Show("Data Is saveed");
+            }
+           
             
         }
     }
